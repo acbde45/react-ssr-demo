@@ -3,9 +3,7 @@ const nodeExternal = require('webpack-node-externals');
 const { merge } = require('webpack-merge');
 
 const base = {
-  mode: 'production',
-  // bail: true,
-  devtool: 'source-map',
+  mode: 'development',
   output: {
     publicPath: '/',
     path: path.join(__dirname, 'dist'),
@@ -17,6 +15,23 @@ const base = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: 'babel-loader',
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'isomorphic-style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              esModule: false,
+            }
+          }
+        ]
+      },
+      {
+        test: /\.svg$/,
+        use: 'svg-react-loader',
       }
     ],
   }
@@ -25,50 +40,19 @@ const base = {
 const client = merge(base, {
   name: 'client',
   target: 'web',
+  devtool: 'source-map',
   entry: {
-    index: './src/index.js',
+    index: './src/client.js',
   },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true
-            }
-          }
-        ]
-      }
-    ],
-  }
 });
 
 const server = merge(base, {
   name: 'server',
   target: 'node',
   entry: {
-    server: './server.js',
+    server: './src/server.js',
   },
   externals: [nodeExternal()],
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [
-          'isomorphic-style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true
-            }
-          }
-        ]
-      }
-    ]
-  }
 });
 
 module.exports = [client, server];
