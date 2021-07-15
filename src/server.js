@@ -1,5 +1,3 @@
-const fs = require('fs');
-const path = require('path');
 const express = require('express');
 const clearConsole = require('react-dev-utils/clearConsole');
 const React = require('react');
@@ -37,11 +35,21 @@ app.listen(PORT, (err) => {
 });
 
 function renderWithMarkup(appString, css) {
-  const template = fs.readFileSync(path.resolve(__dirname, '../public/index.html'), 'utf-8');
-  const nextTemplate = template
-    .replace('<app></app>', appString)
-    .replace('<css></css>', `<style>${[...css].join('')}</style>`);
+  const template = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>${[...css].join('')}</style>
+</head>
+<body>
+  <div id="root">${appString}</div>
+  <script src="/index.js"></script>
+</body>
+</html>`;
 
-  return nextTemplate;
+  return template;
 }
 
