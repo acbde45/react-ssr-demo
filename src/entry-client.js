@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import App from './components/App';
-import store from './store';
+import { getClientStore } from './store';
 
 
 const insertCss = (...styles) => {
@@ -15,7 +15,7 @@ const insertCss = (...styles) => {
 
 ReactDOM.hydrate(
   <StyleContext.Provider value={{ insertCss }}>
-    <Provider store={store}>
+    <Provider store={getClientStore()}>
       <Router>
         <App />
       </Router>

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { updateListState } from '../../store/reducers/list';
 
-export default function About() {
+function About() {
   const list = useSelector((state) => state.list);
   const dispatch = useDispatch();
 
@@ -42,3 +42,23 @@ export default function About() {
     </div>
   );
 }
+
+About.loadData = (store) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      store.dispatch(updateListState({
+        loading: false,
+        value: [
+          '躺',
+          '平',
+          '设',
+          '计',
+          '家',
+        ],
+      }));
+      resolve();
+    });
+  });
+};
+
+export default About;

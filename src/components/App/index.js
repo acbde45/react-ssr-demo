@@ -1,10 +1,8 @@
 import React, { Fragment } from 'react';
 import withStyles from 'isomorphic-style-loader/withStyles';
-import { Link, Switch, Route } from 'react-router-dom';
-
-import Home from '../Home';
-import About from '../About';
-
+import { Link } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config';
+import { routes } from '../../routes';
 import s from './index.css';
 
 function App() {
@@ -13,21 +11,14 @@ function App() {
       <nav className={s.nav}>
         <ul>
           <li>
-            <Link to="/home">Home</Link>
+            <Link to="/">Home</Link>
           </li>
           <li>
             <Link to="/about">About</Link>
           </li>
         </ul>
       </nav>
-      <Switch>
-        <Route path="/about">
-          <About />
-        </Route>
-        <Route path="/home">
-          <Home />
-        </Route>
-      </Switch>
+      {renderRoutes(routes)}
     </Fragment>
   );
 }

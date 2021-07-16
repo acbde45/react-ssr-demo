@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment } from '../../store/reducers/counter';
+import { decrement, increment, incrementByAmount } from '../../store/reducers/counter';
 
-export default function Home() {
+function Home() {
   const count = useSelector((state) => state.counter.value);
   const dispatch = useDispatch();
 
@@ -21,3 +21,14 @@ export default function Home() {
     </div>
   );
 }
+
+Home.loadData = (store) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      store.dispatch(incrementByAmount(10));
+      resolve();
+    });
+  });
+};
+
+export default Home;
