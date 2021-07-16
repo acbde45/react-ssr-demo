@@ -12,8 +12,11 @@
     "build:server": "webpack --config webpack/webpack.server.js"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.6.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.4",
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",

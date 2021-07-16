@@ -1,9 +1,12 @@
-const express = require('express');
-const clearConsole = require('react-dev-utils/clearConsole');
-const React = require('react');
-const { renderToString } = require('react-dom/server');
-const StyleContext = require('isomorphic-style-loader/StyleContext')
-const App = require('./components/App').default;
+import express from 'express';
+import clearConsole from 'react-dev-utils/clearConsole';
+import React from 'react';
+import { renderToString } from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import StyleContext from 'isomorphic-style-loader/StyleContext';
+import store from './store';
+import App from './components/App';
 
 const isTTY = process.stdin.isTTY;
 const PORT = process.env.PORT || 3000;
@@ -18,7 +21,11 @@ app.get('*', (req, res) => {
   
   const html = renderWithMarkup(renderToString(
     <StyleContext.Provider value={{ insertCss }}>
-      <App />
+      <Provider store={store}>
+        <StaticRouter location={req.location}>
+          <App />
+        </StaticRouter>
+      </Provider>
     </StyleContext.Provider>
   ), css);
   res.status(200).send(html);
