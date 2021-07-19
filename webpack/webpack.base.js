@@ -4,6 +4,7 @@ const isProd = process.env.NODE_ENV === 'production';
 
 module.exports = {
   mode: isProd ? 'production' : 'development',
+  bail: isProd,
   output: {
     publicPath: '/',
     path: path.join(__dirname, '../dist'),
