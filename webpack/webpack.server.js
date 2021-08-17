@@ -8,5 +8,12 @@ module.exports = merge(base, {
   entry: {
     server: './src/entry-server.js',
   },
+  output: {
+    library: {
+      name: 'serverRender',
+      type: 'umd',
+      export: 'default'
+    }
+  },
   externals: [nodeExternals()],
 });

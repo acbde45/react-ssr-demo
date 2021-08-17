@@ -3,13 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development npm-run-all --parallel dev:**",
-    "dev:start": "nodemon dist/server.js",
-    "dev:build:client": "webpack --config webpack/webpack.client.js --watch",
-    "dev:build:server": "webpack --config webpack/webpack.server.js --watch",
-    "build": "cross-env NODE_ENV=production npm-run-all --parallel build:**",
-    "build:client": "webpack --config webpack/webpack.client.js",
-    "build:server": "webpack --config webpack/webpack.server.js"
+    "build": "cross-env NODE_ENV=production node server"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.0",
