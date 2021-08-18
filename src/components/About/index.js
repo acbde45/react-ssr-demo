@@ -9,21 +9,19 @@ function About() {
 
   useEffect(() => {
     if (list.value.length !== 0) return;
-    dispatch(updateListState({
-      loading: true,
-      value: [],
-    }));
+    dispatch(
+      updateListState({
+        loading: true,
+        value: [],
+      })
+    );
     setTimeout(() => {
-      dispatch(updateListState({
-        loading: false,
-        value: [
-          '躺',
-          '平',
-          '设',
-          '计',
-          '家',
-        ],
-      }));
+      dispatch(
+        updateListState({
+          loading: false,
+          value: ['躺', '平', '设', '计', '家'],
+        })
+      );
     }, 500);
   }, []);
 
@@ -34,7 +32,7 @@ function About() {
         <p>Loading</p>
       ) : (
         <ul>
-          {list.value.map(text => (
+          {list.value.map((text) => (
             <li key={text}>{text}</li>
           ))}
         </ul>
@@ -43,19 +41,15 @@ function About() {
   );
 }
 
-About.loadData = (store) => {
+About.getInitialProps = (store) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      store.dispatch(updateListState({
-        loading: false,
-        value: [
-          '躺',
-          '平',
-          '设',
-          '计',
-          '家',
-        ],
-      }));
+      store.dispatch(
+        updateListState({
+          loading: false,
+          value: ['躺', '平', '设', '计', '家'],
+        })
+      );
       resolve();
     });
   });

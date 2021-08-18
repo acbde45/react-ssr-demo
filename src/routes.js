@@ -7,13 +7,13 @@ export const routes = [
     component: Home,
     exact: true,
     key: 'home',
-    loadData: Home.loadData,
+    getInitialProps: Home.getInitialProps,
   },
   {
     path: '/about',
     component: About,
     exact: true,
     key: 'about',
-    loadData: About.loadData,
+    getInitialProps: About.getInitialProps,
   },
 ];
